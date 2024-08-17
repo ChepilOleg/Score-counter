@@ -1,0 +1,224 @@
+/* reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+p {
+    font-family: Embed code;
+}
+
+input {
+    font-family: Montserrat;
+}
+
+/* headers */
+
+.header {
+    padding: 2px;
+    height: 44px;
+    background-color: rgb(175, 172, 172);
+    display: flex;
+    justify-content: space-around;
+}
+
+.header__folders-button {
+    height: 40px;
+    width: 40px;
+}
+
+.header__plas-button {
+    height: 40px;
+    width: 40px;
+}
+
+.header__calculation-button {
+    height: 40px;
+    width: 40px;
+}
+
+.header__calculation-button:hover {
+    animation: calculationAnimation 2s linear 1;
+}
+
+/* main */
+
+.list-area__name {
+    text-align: center;
+    color: #454545;
+    font-size: 39px;
+    line-height: 60px;
+}
+
+.list {}
+
+.list__item {
+    border-bottom: 5px solid white;
+    display: flex;
+    height: 55px;
+    padding: 5px 10px;
+    gap: 15px;
+    justify-content: center;
+}
+
+.list__name {
+    font-size: 29px;
+    flex-grow: 1;
+}
+
+.list__inp {
+    text-align: center;
+    font-size: 19px;
+    width: 37px;
+}
+
+.list__score {
+    margin-right: 5px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 40px;
+    width: 40px;
+}
+
+/* modal windows */
+
+.modal-bacgraund {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(48 90 90 / 50%);
+    left: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+/* modla windows folders */
+
+.modal-bacgraund__folders {
+    padding: 20px;
+    display: none;
+    height: 70%;
+    width: 90%;
+    background-color: rgb(223 236 236 / 50%);
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.folder {
+    width: 80px;
+    height: 50px;
+    border: 2px #878686 solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px -2px;
+}
+
+.folder__name {
+    font-weight: 500;
+    font-size: 23px;
+}
+
+/* new list */
+
+.modal-bacgraund__new-list {
+    display: none;
+    height: 90%;
+    width: 90%;
+    background-color: rgb(223 236 236 / 50%);
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.new-list-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.new-list-form__name-list {
+    height: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.new-list-form__list {
+    padding: 10px;
+}
+
+.new-list-form__item {
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.new-list-form__color {
+    height: 40px;
+    width: 40px;
+}
+
+.new-list-form__name {
+    font-size: 16px;
+    flex-grow: 1;
+    height: 40px;
+    padding-left: 17px;
+}
+
+.new-list__buttons {
+    display: flex;
+    height: 70px;
+    width: 100%;
+}
+
+.cansel,
+.end {
+    flex-grow: 1;
+    font-size: 20px;
+}
+
+/* calculation */
+
+.modal-bacgraund__calculation {
+    display: none;
+    height: 90%;
+    width: 90%;
+    background-color: brown;
+}
+
+.visible {
+    display: flex;
+
+}
+
+@keyframes calculationAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-25deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Score counter</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+            rel="stylesheet"
+        />
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header class="header">
+            <img
+                class="header__folders-button"
+                data-connection="folders"
+                src="imgs/histori.png"
+                alt=""
+            />
+            <img
+                class="header__plas-button"
+                data-connection="plas"
+                src="imgs/plas.png"
+                alt=""
+            />
+            <img
+                class="header__calculation-button"
+                data-connection="calculation"
+                src="imgs/calculation.png"
+                alt=""
+            />
+        </header>
+        <main class="main">
+            <div class="list-area">
+                <h1 class="list-area__name"></h1>
+                <ol class="list"></ol>
+            </div>
+        </main>
+
+        <div class="modal-bacgraund">
+            <div
+                class="modal-bacgraund__folders"
+                data-connection="foldersM"
+            ></div>
+            <div class="modal-bacgraund__new-list" data-connection="plasM">
+                <form class="new-list-form" name="new-list-form">
+                    <input class="new-list-form__name-list" type="text" />
+                    <ol class="new-list-form__list"></ol>
+                </form>
+                <div class="new-list__buttons">
+                    <button class="cansel">Відмінити</button>
+                    <button class="end">Завершити</button>
+                </div>
+            </div>
+            <div
+                class="modal-bacgraund__calculation"
+                data-connection="calculationM"
+            ></div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
