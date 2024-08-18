@@ -53,7 +53,8 @@ class Brain {
         let lis = document.querySelectorAll(".list__inp");
         for (let i = 0; i < lis.length; i++) {
             let x = lis[i].nextElementSibling.innerHTML;
-            let y = lis[i].value;
+            let y = parseInt(lis[i].value);
+            if (typeof y != "number") y = 0;
             lis[i].value = "";
             lis[i].placeholder = y;
             let sum = +y + +x;
@@ -63,7 +64,7 @@ class Brain {
     }
 
     sorts() {
-        this._list.plaers.sort((a, b) => b.score - a.score);
+        this._list?.plaers.sort((a, b) => b.score - a.score);
         this._listDOM.sort(
             (a, b) =>
                 +b.lastElementChild.innerHTML - +a.lastElementChild.innerHTML
@@ -155,6 +156,7 @@ function onVisible() {
 // events
 
 function headerButtonsEvent(event) {
+    console.log(event.target);
     if (event.target.closest("img")) {
         const backgraund = document.querySelector(".modal-bacgraund");
         backgraund.classList.add("visible");
@@ -204,9 +206,14 @@ function bGNewList(event) {
         brain.showNewListItem(true);
     }
 }
-function bGcalculation(event) {}
+function bG(event) {
+    if (event.target.classList.contains("modal-bacgraund")) {
+        onVisible();
+    }
+}
 
 document.querySelector(".header").addEventListener("click", headerButtonsEvent);
+document.querySelector(".modal-bacgraund").addEventListener("click", bG);
 document
     .querySelector(".modal-bacgraund__folders")
     .addEventListener("click", bGFoldersEvents);
