@@ -52,9 +52,10 @@ class Brain {
     plas() {
         let lis = document.querySelectorAll(".list__inp");
         for (let i = 0; i < lis.length; i++) {
-            let x = lis[i].nextElementSibling.innerHTML;
-            let y = parseInt(lis[i].value);
-            if (typeof y != "number") y = 0;
+            let x = +lis[i].nextElementSibling.innerHTML;
+            let y = +parseInt(lis[i].value);
+            if (typeof y != "number" || isNaN(y)) y = 0;
+            if (typeof x != "number" || isNaN(x)) x = 0;
             lis[i].value = "";
             lis[i].placeholder = y;
             let sum = +y + +x;
@@ -156,7 +157,6 @@ function onVisible() {
 // events
 
 function headerButtonsEvent(event) {
-    console.log(event.target);
     if (event.target.closest("img")) {
         const backgraund = document.querySelector(".modal-bacgraund");
         backgraund.classList.add("visible");
