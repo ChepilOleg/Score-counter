@@ -46,20 +46,19 @@ input {
     width: 40px;
 }
 
-.header__calculation-button:hover {
+.AAAA {
     animation: calculationAnimation 2s linear 1;
 }
 
 /* main */
 
 .list-area__name {
+    width: 100%;
     text-align: center;
     color: #454545;
     font-size: 39px;
     line-height: 60px;
 }
-
-.list {}
 
 .list__item {
     border-bottom: 5px solid white;
@@ -95,7 +94,7 @@ input {
     display: none;
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: rgb(48 90 90 / 50%);
     left: 0;
     top: 0;
@@ -108,7 +107,7 @@ input {
 .modal-bacgraund__folders {
     padding: 20px;
     display: none;
-    height: 70%;
+    min-height: 70vh;
     width: 90%;
     background-color: rgb(223 236 236 / 50%);
     align-items: center;
@@ -137,7 +136,7 @@ input {
 
 .modal-bacgraund__new-list {
     display: none;
-    height: 90%;
+    min-height: 90vh;
     width: 90%;
     background-color: rgb(223 236 236 / 50%);
     flex-direction: column;
@@ -195,18 +194,22 @@ input {
     font-size: 20px;
 }
 
-/* calculation */
+/* other */
 
-.modal-bacgraund__calculation {
-    display: none;
-    height: 90%;
-    width: 90%;
-    background-color: brown;
+.hidden-input {
+    overflow: auto;
+    min-width: 2rem;
+    background: none;
+    border: none;
+    font-family: Embed code;
 }
 
 .visible {
     display: flex;
+}
 
+.onVisible {
+    display: none;
 }
 
 @keyframes calculationAnimation {
@@ -221,4 +224,26 @@ input {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.color-setting {
+    height: 40px;
+    width: 40px;
+    position: relative;
+}
+
+.color-setting>svg {
+    height: inherit;
+    width: inherit;
+}
+
+.color-setting>input {
+    height: inherit;
+    width: inherit;
+    opacity: 0%;
+    position: absolute;
+}
+
+.test {
+    color: rgb(14, 4, 2);
 }
