@@ -46,8 +46,34 @@ input {
     width: 40px;
 }
 
-.AAAA {
-    animation: calculationAnimation 2s linear 1;
+/*  */
+
+.calckAnimation {
+    animation: calculationAnimation 2s 1;
+}
+
+/* setings */
+
+.color-setting {
+    height: 40px;
+    width: 40px;
+    position: relative;
+}
+
+.color-setting>svg {
+    height: inherit;
+    width: inherit;
+}
+
+.color-setting>input {
+    height: inherit;
+    width: inherit;
+    opacity: 0%;
+    position: absolute;
+}
+
+.rotate {
+    animation: rotete 4s infinite linear;
 }
 
 /* main */
@@ -94,6 +120,7 @@ input {
     display: none;
     position: absolute;
     width: 100vw;
+    min-height: 100lvh;
     min-height: 100vh;
     background-color: rgb(48 90 90 / 50%);
     left: 0;
@@ -105,16 +132,16 @@ input {
 /* modla windows folders */
 
 .modal-bacgraund__folders {
-    padding: 20px;
     display: none;
-    min-height: 70vh;
-    width: 90%;
+    padding: 20px;
+    margin: 15lvh 5%;
+    min-height: 70lvh;
     background-color: rgb(223 236 236 / 50%);
-    align-items: center;
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
+    width: 100%;
 }
 
 .folder {
@@ -138,6 +165,7 @@ input {
     display: none;
     min-height: 90vh;
     width: 90%;
+    margin: 5lvh 5%;
     background-color: rgb(223 236 236 / 50%);
     flex-direction: column;
     align-items: center;
@@ -194,6 +222,7 @@ input {
     font-size: 20px;
 }
 
+
 /* other */
 
 .hidden-input {
@@ -212,6 +241,10 @@ input {
     display: none;
 }
 
+.onVisible2 {
+    display: none;
+}
+
 @keyframes calculationAnimation {
     0% {
         transform: rotate(0deg);
@@ -226,24 +259,12 @@ input {
     }
 }
 
-.color-setting {
-    height: 40px;
-    width: 40px;
-    position: relative;
-}
+@keyframes rotete {
+    0% {
+        transform: rotate(0deg);
+    }
 
-.color-setting>svg {
-    height: inherit;
-    width: inherit;
-}
-
-.color-setting>input {
-    height: inherit;
-    width: inherit;
-    opacity: 0%;
-    position: absolute;
-}
-
-.test {
-    color: rgb(14, 4, 2);
+    100% {
+        transform: rotate(360deg);
+    }
 }

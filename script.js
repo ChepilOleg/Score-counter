@@ -64,6 +64,20 @@ class Brain {
         return li;
     }
 
+    createNewListItem() {
+        let li = document.createElement("li");
+        li.classList.add("list__item");
+        li.style.backgroundColor = this.randomColor();
+        li.innerHTML = `<input class="list__name hidden-input" value="Ім'я" >
+                        <input class="onVisible hidden-input">
+                        <input class="list__score hidden-input" value="0">
+                        <div class="color-setting">
+                            <input class="input-color" type="color">
+                            ${this.CreateSVGBrash()}
+                        </div>`;
+        return li;
+    }
+
     // SHOW ELEMENTS SHOW ELEMENTSSHOW ELEMENTSSHOW ELEMENTSSHOW ELEMENTSSHOW ELEMENTSSHOW ELEMENTSSHOW ELEMENTS
 
     showFolders() {
@@ -135,10 +149,20 @@ class Brain {
         let newListItemScore = document.querySelectorAll(".list__score");
         let newListItemColor = document.querySelectorAll(".input-color");
         for (let i = 0; i < newListItemName.length; i++) {
-            this._list.plaers[i].name = newListItemName[i].value;
-            this._list.plaers[i].score = this.validationNamber(
-                newListItemScore[i].value
-            );
+            if (this._list.plaers[i]) {
+                this._list.plaers[i].name = newListItemName[i].value;
+                this._list.plaers[i].score = this.validationNamber(
+                    newListItemScore[i].value
+                );
+            } else {
+                this._list.plaers.push({
+                    name: newListItemName[i].value,
+                    score: this.validationNamber(newListItemScore[i].value),
+                    color: newListItemName[i].parentElement.style
+                        .backgroundColor
+                });
+            }
+
             if (newListItemColor[i].value != "#000000") {
                 this._list.plaers[i].color = newListItemColor[i].value;
             }
@@ -327,8 +351,89 @@ function onVisible() {
 
 // events
 
+// setings
+
+function settingsEdit(event) {
+    if (event.target.closest(".input-color")) {
+        let color = event.target.value;
+        event.target.parentElement.lastElementChild.style.fill = color;
+    }
+}
+
+function itemsColor(startSetings) {
+    if (startSetings) {
+        document.documentElement.addEventListener("input", settingsEdit);
+        document.querySelectorAll(".list__item").forEach((item) => {
+            let div = document.createElement("div");
+            div.classList.add("color-setting");
+            let input = document.createElement("input");
+            input.classList.add("input-color");
+            input.type = "color";
+            div.append(input);
+            div.insertAdjacentHTML("beforeend", brain.CreateSVGBrash());
+            item.append(div);
+        });
+    } else {
+        document.documentElement.removeEventListener("input", settingsEdit);
+        document.querySelectorAll(".color-setting").forEach((item) => {
+            if (item.firstElementChild.value != "#000000") {
+                item.parentElement.style.backgroundColor =
+                    item.firstElementChild.value;
+            }
+            item.remove();
+        });
+    }
+}
+
+function pushSetingsBottom(start) {
+    isSetings = start;
+
+    let headerButtons = event.target.parentElement.children;
+
+    for (let i = 0; i < headerButtons.length - 1; i++) {
+        headerButtons[i].classList.toggle("onVisible2");
+    }
+
+    itemsColor(isSetings);
+    brain.chengesText({
+        classText: "list__name",
+        toInput: start
+    });
+    brain.chengesText({
+        classText: "list__score",
+        toInput: start,
+        validatin: brain.validationNamber
+    });
+    brain.chengesText({
+        classText: "list-area__name",
+        toInput: start,
+        typeText: "h1"
+    });
+    brain.chengesText({
+        classText: "list__inp",
+        classInp: "onVisible",
+        toInput: start,
+        typeText: "input"
+    });
+}
+
+function endSetings(save) {
+    if (save) {
+        brain.write();
+        pushSetingsBottom(false);
+    } else {
+        pushSetingsBottom(false);
+        brain.showList();
+    }
+    document.querySelectorAll(".rotate").forEach((item) => {
+        item.classList.remove("rotate");
+    });
+}
+
+// events
+
 function headerButtonsEvent(event) {
-    if (event.target.closest("img")) {
+    if (event.target.closest("img") || event.target.closest("button")) {
         const backgraund = document.querySelector(".modal-bacgraund");
         const targetM = document.querySelector(
             `[data-connection="${event.target.dataset.connection}M"]`
@@ -345,9 +450,11 @@ function headerButtonsEvent(event) {
                 brain.showNewListItem();
                 break;
             case "calculation":
-                event.target.closest("img").classList.add("AAAA");
+                event.target.closest("img").classList.add("calckAnimation");
                 let sT = setTimeout(() => {
-                    event.target.closest("img").classList.remove("AAAA");
+                    event.target
+                        .closest("img")
+                        .classList.remove("calckAnimation");
                 }, 2000);
                 brain.plas();
                 brain.sorts();
@@ -362,89 +469,35 @@ function headerButtonsEvent(event) {
                         .querySelector('[data-connection="foldersM"')
                         .classList.add("visible");
                 } else {
-                    function settingsEdit(event) {
-                        if (event.target.closest(".input-color")) {
-                            let color = event.target.value;
-                            event.target.parentElement.lastElementChild.style.fill =
-                                color;
-                        }
-                    }
-
-                    function itemsColor(startSetings) {
-                        if (startSetings) {
-                            document.documentElement.addEventListener(
-                                "input",
-                                settingsEdit
-                            );
-                            document
-                                .querySelectorAll(".list__item")
-                                .forEach((item) => {
-                                    let div = document.createElement("div");
-                                    div.classList.add("color-setting");
-                                    let input = document.createElement("input");
-                                    input.classList.add("input-color");
-                                    input.type = "color";
-                                    div.append(input);
-                                    div.insertAdjacentHTML(
-                                        "beforeend",
-                                        brain.CreateSVGBrash()
-                                    );
-                                    item.append(div);
-                                });
-                        } else {
-                            document.documentElement.removeEventListener(
-                                "input",
-                                settingsEdit
-                            );
-                            document
-                                .querySelectorAll(".color-setting")
-                                .forEach((item) => {
-                                    if (
-                                        item.firstElementChild.value !=
-                                        "#000000"
-                                    ) {
-                                        item.parentElement.style.backgroundColor =
-                                            item.firstElementChild.value;
-                                    }
-                                    item.remove();
-                                });
-                        }
-                    }
-
-                    function pushSetingsBottom(start) {
-                        isSetings = start;
-
-                        itemsColor(isSetings);
-                        brain.chengesText({
-                            classText: "list__name",
-                            toInput: start
-                        });
-                        brain.chengesText({
-                            classText: "list__score",
-                            toInput: start,
-                            validatin: brain.validationNamber
-                        });
-                        brain.chengesText({
-                            classText: "list-area__name",
-                            toInput: start,
-                            typeText: "h1"
-                        });
-                        brain.chengesText({
-                            classText: "list__inp",
-                            classInp: "onVisible",
-                            toInput: start,
-                            typeText: "input"
-                        });
-                    }
-
                     if (isSetings) {
-                        brain.write();
-                        // brain.save();
-                        pushSetingsBottom(false);
+                        endSetings(confirm("Зберегти зміни?"));
                     } else {
+                        event.target.classList.add("rotate");
                         pushSetingsBottom(true);
                     }
                 }
+                break;
+
+            case "plasItem":
+                document
+                    .querySelector(".list")
+                    .append(brain.createNewListItem());
+                break;
+            case "cansel":
+                endSetings(confirm("Зберегти зміни?"));
+                break;
+            case "delete":
+                localStorage.removeItem(`folder-${brain._listName}`);
+                brain._folders.splice(
+                    brain._folders.indexOf(brain._listName),
+                    1
+                );
+                setLocalStorege("foldersList", brain._folders);
+                document.querySelector(".list-area").innerHTML = "";
+                document.querySelectorAll(".rotate").forEach((item) => {
+                    item.classList.remove("rotate");
+                });
+                pushSetingsBottom(false);
                 break;
         }
     }
