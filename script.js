@@ -142,7 +142,6 @@ class Brain {
                 1,
                 newListName
             );
-            this._listName = newListName;
         }
 
         let newListItemName = document.querySelectorAll(".list__name");
@@ -357,12 +356,18 @@ function settingsEdit(event) {
     if (event.target.closest(".input-color")) {
         let color = event.target.value;
         event.target.parentElement.lastElementChild.style.fill = color;
+    } else if (event.target.closest(".delete-item")) {
+        let element = event.target.closest(".delete-item").parentElement;
+        x = brain._listDOM.indexOf(event.target.closest(".delete-item"));
+        brain._list.plaers.splice(x, 1);
+        element.remove();
     }
 }
 
 function itemsColor(startSetings) {
     if (startSetings) {
         document.documentElement.addEventListener("input", settingsEdit);
+        document.documentElement.addEventListener("click", settingsEdit);
         document.querySelectorAll(".list__item").forEach((item) => {
             let div = document.createElement("div");
             div.classList.add("color-setting");
@@ -375,6 +380,7 @@ function itemsColor(startSetings) {
         });
     } else {
         document.documentElement.removeEventListener("input", settingsEdit);
+        document.documentElement.removeEventListener("click", settingsEdit);
         document.querySelectorAll(".color-setting").forEach((item) => {
             if (item.firstElementChild.value != "#000000") {
                 item.parentElement.style.backgroundColor =
@@ -411,7 +417,7 @@ function pushSetingsBottom(start) {
     });
     brain.chengesText({
         classText: "list__inp",
-        classInp: "onVisible",
+        classInp: "delete-item",
         toInput: start,
         typeText: "input"
     });
