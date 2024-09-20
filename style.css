@@ -245,10 +245,13 @@ input {
     display: none;
 }
 
+.header__button-seting {}
+
 .delete-item {
-    background-image: url(/imgs/plas.png);
+    background-image: url(imgs/delete-element.svg);
     height: 40px;
-    width: 60px;
+    width: 55px;
+    background-size: cover;
 }
 
 @keyframes calculationAnimation {

@@ -69,7 +69,7 @@ class Brain {
         li.classList.add("list__item");
         li.style.backgroundColor = this.randomColor();
         li.innerHTML = `<input class="list__name hidden-input" value="Ім'я" >
-                        <input class="onVisible hidden-input">
+                        <input class="delete-item hidden-input">
                         <input class="list__score hidden-input" value="0">
                         <div class="color-setting">
                             <input class="input-color" type="color">
